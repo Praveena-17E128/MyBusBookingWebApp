@@ -1,0 +1,41 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyBusBookingWebApp</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <li><a asp-controller="Admin" asp-action="UserManagement">User Management</a></li>
+                    <li><a asp-controller="Admin" asp-action="Reports">Reports</a></li>
+                }
+                else if (User.IsInRole("User"))
+                {
+                    <li><a asp-controller="User" asp-action="Dashboard">Dashboard</a></li>
+                    <li><a asp-controller="User" asp-action="Profile">Profile</a></li>
+                }
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            }
+            else
+            {
+                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+            }
+        </ul>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+@model MyBusBookingWebApp.Models.LoginViewModel
+
+<form asp-action="Login" method="post">
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+    </div>
+    <div>
+        <input asp-for="RememberMe" type="checkbox" /> Remember Me
+    </div>
+    <button type="submit">Login</button>
+    <div asp-validation-summary="All"></div>
+</form>
